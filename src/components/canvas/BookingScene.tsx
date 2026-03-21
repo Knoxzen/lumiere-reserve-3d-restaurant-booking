@@ -1,0 +1,33 @@
+"use client";
+
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
+import { RestaurantMap } from "./RestaurantMap";
+import { Suspense } from "react";
+
+import { Selection, EffectComposer, Outline } from "@react-three/postprocessing";
+
+
+export function BookingScene({status}: {status: Record<string, string>}) {
+    return (
+        <Canvas className="h-full w-full" shadows camera={{ position: [0, 12, 16], fov: 45 }}>
+            <Suspense fallback={null}>
+                <Selection>
+                    <EffectComposer autoClear={false}>
+                        <Outline blur visibleEdgeColor={0xffffff} edgeStrength={100} width={1000} />
+                    </EffectComposer>
+                    <RestaurantMap status={status}/>
+                </Selection>
+                <OrbitControls
+                    makeDefault
+                    minPolarAngle={Math.PI / 6}
+                    maxPolarAngle={Math.PI / 2 - 0.1}
+                    minDistance={8}
+                    maxDistance={30}
+                    enableDamping
+                    dampingFactor={0.05}
+                />
+            </Suspense>
+        </Canvas>
+    );
+}
