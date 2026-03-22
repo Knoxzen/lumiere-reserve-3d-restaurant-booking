@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { Slider } from "./ui/slider";
 
 type Props = {
   onChange: (value: number) => void
@@ -36,7 +37,7 @@ export default function TimeSlider({ onChange }: Props) {
     { label: '21:00', value: 1260 },
   ];
   return (
-    <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 bg-[#1a1a1a] p-10 rounded-2xl w-full max-w-4xl font-sans text-white border border-white/5 shadow-2xl">
+    <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 bg-[#1a1a1a] p-6 rounded-2xl w-full max-w-4xl font-sans text-white border border-white/5 shadow-2xl">
       <div className="flex justify-between items-start mb-8">
         <div>
           <p className="text-[10px] uppercase tracking-[0.2em] text-gray-500 font-bold mb-2">Time Sequence</p>
@@ -58,24 +59,13 @@ export default function TimeSlider({ onChange }: Props) {
       </div>
 
       <div className="relative w-full group">
-        <input
-          type="range"
+        <Slider
           min={min}
           max={max}
           step={30}
-          value={time}
-          onChange={(e) => setTime(parseInt(e.target.value))}
-          className="absolute top-0 w-full h-1 bg-transparent appearance-none cursor-pointer z-20 accent-transparent [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#ffd700] [&::-webkit-slider-thumb]:shadow-[0_0_15px_rgba(255,215,0,0.8)]"
+          value={[time]}
+          onValueChange={(vals) => setTime(vals[0])}
         />
-
-        {/* Custom Track Background */}
-        <div className="absolute top-[6px] w-full h-[1px] bg-gray-800 z-0"></div>
-
-        {/* Active Track (Gold Line) */}
-        <div
-          className="absolute top-[6px] h-[1.5px] bg-[#d4af37] z-10 transition-all duration-150"
-          style={{ width: `${percentage}%` }}
-        ></div>
       </div>
 
       <div className="flex justify-between mt-10 text-[10px] uppercase tracking-widest text-gray-600 font-bold">
