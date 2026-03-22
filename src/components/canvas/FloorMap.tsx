@@ -27,7 +27,7 @@ export function FloorMap({
     const { scene } = useGLTF(url);
     const [hovered, setHovered] = useState<string | null>(null);
     const { nodes, materials } = useGLTF(url);
-    const [tabelStatus, setTabelStatus] = useState(status);
+
 
     const tables = [
         "table010",
@@ -40,7 +40,7 @@ export function FloorMap({
 
     const getMaterialProps = (id: string) => {
         const isHovered = hovered === id
-        const isBooked = tabelStatus[id] === "booked"
+        const isBooked = status[id] === "booked"
 
         if (isBooked) {
             return {
