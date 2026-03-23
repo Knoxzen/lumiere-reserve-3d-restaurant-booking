@@ -9,7 +9,7 @@ import { Selection, EffectComposer, Outline } from "@react-three/postprocessing"
 
 interface BookingSceneProps {
     status: Record<string, string>;
-    onTableSelect: (tableId: string) => void;
+    onTableSelect: (id: string) => void;
 }
 
 export function BookingScene({status, onTableSelect}: BookingSceneProps) {

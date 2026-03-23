@@ -5,9 +5,8 @@ import { FloorMap } from "./FloorMap";
 
 interface RestaurantMapProps {
     status: Record<string, string>;
-    onTableSelect: (tableId: string) => void;
+    onTableSelect: (id: string) => void;
 }
-
 export function RestaurantMap({status, onTableSelect}: RestaurantMapProps) {
 
     return (

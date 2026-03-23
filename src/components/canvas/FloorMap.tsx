@@ -14,7 +14,7 @@ interface FloorMapProps {
     rotation?: [number, number, number];
     scale?: number | [number, number, number];
     status?: Record<string, string>;
-    onTableSelect: (tableId: string) => void;
+    onTableSelect: (id: string) => void;
 }
 
 export function FloorMap({
@@ -29,7 +29,7 @@ export function FloorMap({
     const { scene } = useGLTF(url);
     const [hovered, setHovered] = useState<string | null>(null);
     const { nodes, materials } = useGLTF(url);
-    const [tabelStatus, setTabelStatus] = useState(status);
+
 
     const tables = [
         "table010",
@@ -42,7 +42,7 @@ export function FloorMap({
 
     const getMaterialProps = (id: string) => {
         const isHovered = hovered === id
-        const isBooked = tabelStatus[id] === "booked"
+        const isBooked = status[id] === "booked"
 
         if (isBooked) {
             return {
@@ -82,8 +82,8 @@ export function FloorMap({
                         setHovered(null)
                         document.body.style.cursor = "default"
                     }}
-                    onClick={(e) => {
-                        e.stopPropagation()
+                    onClick={() => {
+                        if (status[id] === "booked") return
                         onTableSelect(id)
                     }}
                 >
