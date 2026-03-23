@@ -14,6 +14,7 @@ interface FloorMapProps {
     rotation?: [number, number, number];
     scale?: number | [number, number, number];
     status?: Record<string, string>;
+    onTableSelect: (id: string) => void;
 }
 
 export function FloorMap({
@@ -21,7 +22,8 @@ export function FloorMap({
     position = [0, 0, 0],
     rotation = [0, 0, 0],
     scale = 1,
-    status = {}
+    status = {},
+    onTableSelect,
 }: FloorMapProps) {
 
     const { scene } = useGLTF(url);
@@ -79,6 +81,10 @@ export function FloorMap({
                     onPointerOut={() => {
                         setHovered(null)
                         document.body.style.cursor = "default"
+                    }}
+                    onClick={() => {
+                        if (status[id] === "booked") return
+                        onTableSelect(id)
                     }}
                 >
                     <meshStandardMaterial {...getMaterialProps(id)} />

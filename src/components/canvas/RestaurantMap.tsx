@@ -3,7 +3,11 @@
 import { Environment, SoftShadows } from "@react-three/drei";
 import { FloorMap } from "./FloorMap";
 
-export function RestaurantMap({status}: {status: Record<string, string>}) {
+interface RestaurantMapProps {
+    status: Record<string, string>;
+    onTableSelect: (id: string) => void;
+}
+export function RestaurantMap({status, onTableSelect}: RestaurantMapProps) {
 
     return (
         <group>
@@ -24,7 +28,7 @@ export function RestaurantMap({status}: {status: Record<string, string>}) {
             <pointLight position={[-5, 5, -5]} intensity={2} distance={20} color="#fcd34d" />
             <pointLight position={[5, 5, 5]} intensity={2} distance={20} color="#fcd34d" />
 
-            <FloorMap url="/floor.glb" status={status}  />
+            <FloorMap url="/floor.glb" status={status} onTableSelect={onTableSelect} />
 
             {/* Environment for premium reflections */}
             <Environment preset="city" />
