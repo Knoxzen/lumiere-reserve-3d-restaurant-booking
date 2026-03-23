@@ -1,6 +1,7 @@
 "use client";
 
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
+import { useRouter } from "next/navigation";
 
 interface SideDrawerProps {
     open: boolean;
@@ -9,6 +10,7 @@ interface SideDrawerProps {
 }
 
 export function SideDrawer({ open, onOpenChange, selectedTableId }: SideDrawerProps) {
+    const router = useRouter();
     return (
         <Drawer open={open} onOpenChange={onOpenChange} direction="right">
             <DrawerContent>
@@ -78,7 +80,11 @@ export function SideDrawer({ open, onOpenChange, selectedTableId }: SideDrawerPr
 
                         {/* Footer Action */}
                         <div className="p-8 pt-0">
-                            <button className="w-full bg-gradient-to-r from-[#F2D07E] to-[#D9AC51] text-black py-4 text-[11px] font-bold uppercase tracking-[0.2em] hover:brightness-110 transition-all shadow-lg shadow-yellow-900/10 active:scale-[0.98]">
+                            <button onClick={() => {
+                                router.push("/booking");
+
+                            }} 
+                            className="w-full bg-gradient-to-r from-[#F2D07E] to-[#D9AC51] text-black py-4 text-[11px] font-bold uppercase tracking-[0.2em] hover:brightness-110 transition-all shadow-lg shadow-yellow-900/10 active:scale-[0.98]">
                                 Proceed with Selection
                             </button>
                         </div>
